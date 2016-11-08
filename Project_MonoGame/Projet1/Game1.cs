@@ -12,6 +12,7 @@ namespace Projet1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GameObject mario;
+        Rectangle fenetre;
 
         public Game1()
         {
@@ -29,6 +30,10 @@ namespace Projet1
         {
             // TODO: Add your initialization logic here
 
+            this.graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
+            this.graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
+            this.graphics.ToggleFullScreen();
+            fenetre = new Rectangle(0,0, graphics.GraphicsDevice.DisplayMode.Width, graphics.GraphicsDevice.DisplayMode.Height);
             base.Initialize();
         }
 
@@ -43,7 +48,7 @@ namespace Projet1
             mario = new GameObject();
             mario.estVivant = true;
             mario.position.X = 0;
-            mario.position.Y = 300;
+            mario.position.Y = fenetre.Height - mario.hauteur;
             mario.sprite = Content.Load<Texture2D>("mario-jump.png");
             // TODO: use this.Content to load your game content here
         }
@@ -68,22 +73,26 @@ namespace Projet1
             {
                 Exit();
             }
-            if(Keyboard.GetState().IsKeyDown(Keys.A))
+            if(mario.position.X >= 0 && mario.position.X <= fenetre.Width - mario.longueur)
             {
-                mario.position.X -= 2;
+                if(Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    mario.position.X -= 2;
+                }
+                if(Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    mario.position.X += 2;
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            else if(mario.position.X < 0)
             {
-                mario.position.X += 2;
+                mario.position.X = 0;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            else if(mario.position.X > fenetre.Width - mario.longueur)
             {
-                mario.position.Y -= 2;
+                mario.position.X = fenetre.Width - mario.longueur;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                mario.position.Y += 2;
-            }
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -98,9 +107,6 @@ namespace Projet1
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(mario.sprite,mario.position, Color.White);
-
-
-
             spriteBatch.End();
             // TODO: Add your drawing code here
 

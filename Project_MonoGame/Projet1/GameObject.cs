@@ -14,5 +14,7 @@ namespace Projet1
         public Texture2D sprite;
         public Vector2 position;
         public Vector2 vitesse;
+        public int hauteur = 175;
+        public int longueur = 500;
     }
 }
