@@ -12,6 +12,8 @@ namespace Projet1
     {
         public bool estVivant;
         public int vitesse;
+        public int hauteur;
+        public int longueur;
         public Texture2D sprite;
         public Rectangle position;
     }

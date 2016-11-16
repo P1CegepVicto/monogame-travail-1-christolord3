@@ -13,6 +13,9 @@ namespace Projet1
         SpriteBatch spriteBatch;
         Rectangle fenetre;
         GameObject heros;
+        GameObject Background;
+        GameObject missile;
+        GameObject ennemi;
 
         public Game1()
         {
@@ -46,10 +49,23 @@ namespace Projet1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             heros = new GameObject();
+            Background = new GameObject();
             heros.estVivant = true;
+            Background.estVivant = true;
+            Background.sprite = Content.Load<Texture2D>("Background.jpg");
             heros.vitesse = 5;
+            heros.hauteur = 48;
+            heros.longueur = 160;
             heros.sprite = Content.Load<Texture2D>("Vaisseau.png");
             heros.position = heros.sprite.Bounds;
+            Background.position = Background.sprite.Bounds;
+            Background.hauteur = 1920;
+            Background.longueur = 1080;
+            missile = new GameObject();
+            missile.estVivant = false;
+            missile.sprite = Content.Load<Texture2D>("Missile.png");
+            missile.position = missile.sprite.Bounds;
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -73,30 +89,45 @@ namespace Projet1
             {
                 Exit();
             }
-            UpdateHero();
+            clavier();
+            mouvementNonJoueur();
+            limiteEcranObjet();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
-
-        public void UpdateHero()
+        public void mouvementNonJoueur()
         {
-            if(heros.position.X < fenetre.Left)
+            if(missile.estVivant == true)
             {
-                heros.position.X = fenetre.Left;
+                missile.position.Y -= missile.vitesse;
             }
-            if (heros.position.X > fenetre.Right)
+        }
+        public void limiteEcranObjet()
+        {
+            if(heros.position.X < 0)
             {
-                heros.position.X = fenetre.Right;
+                heros.position.X = 0;
             }
-            if (heros.position.Y < fenetre.Top)
+            if(heros.position.Y < 0)
             {
-                heros.position.Y = fenetre.Top;
+                heros.position.Y = 0;
             }
-            if (heros.position.Y > fenetre.Bottom)
+            if (heros.position.Y > fenetre.Height - heros.hauteur)
             {
-                heros.position.Y = fenetre.Bottom;
+                heros.position.Y = fenetre.Height - heros.hauteur;
             }
+            if (heros.position.X > fenetre.Width - heros.longueur)
+            {
+                heros.position.X = fenetre.Width - heros.longueur;
+            }
+            if(missile.position.Y < 0)
+            {
+                missile.estVivant = false;
+            }
+        }
+        public void clavier()
+        {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 heros.position.Y -= heros.vitesse;
@@ -113,6 +144,20 @@ namespace Projet1
             {
                 heros.position.X += heros.vitesse;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                heros.position.X += heros.vitesse;
+            }
+            if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if (missile.estVivant != true)
+                {
+                    missile.estVivant = true;
+                    missile.position.X = (heros.position.Width / 2) + heros.position.X;
+                    missile.position.Y = (heros.position.Height / 2) + heros.position.Y;
+                    missile.vitesse = 15;
+                }
+            }
         }
 
         /// <summary>
@@ -123,6 +168,11 @@ namespace Projet1
         {
             GraphicsDevice.Clear(Color.Aqua);
             spriteBatch.Begin();
+            spriteBatch.Draw(Background.sprite, Background.position, Color.White);
+            if (missile.estVivant == true)
+            {
+                spriteBatch.Draw(missile.sprite, missile.position, Color.White);
+            }
             spriteBatch.Draw(heros.sprite, heros.position, Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
