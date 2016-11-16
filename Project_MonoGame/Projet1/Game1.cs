@@ -11,8 +11,8 @@ namespace Projet1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        GameObject mario;
         Rectangle fenetre;
+        GameObject heros;
 
         public Game1()
         {
@@ -45,11 +45,11 @@ namespace Projet1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            mario = new GameObject();
-            mario.estVivant = true;
-            mario.position.X = 0;
-            mario.position.Y = fenetre.Height - mario.hauteur;
-            mario.sprite = Content.Load<Texture2D>("mario-jump.png");
+            heros = new GameObject();
+            heros.estVivant = true;
+            heros.vitesse = 5;
+            heros.sprite = Content.Load<Texture2D>("Vaisseau.png");
+            heros.position = heros.sprite.Bounds;
             // TODO: use this.Content to load your game content here
         }
 
@@ -73,29 +73,46 @@ namespace Projet1
             {
                 Exit();
             }
-            if(mario.position.X >= 0 && mario.position.X <= fenetre.Width - mario.longueur)
-            {
-                if(Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    mario.position.X -= 2;
-                }
-                if(Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    mario.position.X += 2;
-                }
-            }
-            else if(mario.position.X < 0)
-            {
-                mario.position.X = 0;
-            }
-            else if(mario.position.X > fenetre.Width - mario.longueur)
-            {
-                mario.position.X = fenetre.Width - mario.longueur;
-            }
-            
+            UpdateHero();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        public void UpdateHero()
+        {
+            if(heros.position.X < fenetre.Left)
+            {
+                heros.position.X = fenetre.Left;
+            }
+            if (heros.position.X > fenetre.Right)
+            {
+                heros.position.X = fenetre.Right;
+            }
+            if (heros.position.Y < fenetre.Top)
+            {
+                heros.position.Y = fenetre.Top;
+            }
+            if (heros.position.Y > fenetre.Bottom)
+            {
+                heros.position.Y = fenetre.Bottom;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                heros.position.Y -= heros.vitesse;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                heros.position.X -= heros.vitesse;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                heros.position.Y += heros.vitesse;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                heros.position.X += heros.vitesse;
+            }
         }
 
         /// <summary>
@@ -104,9 +121,9 @@ namespace Projet1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Aqua);
             spriteBatch.Begin();
-            spriteBatch.Draw(mario.sprite,mario.position, Color.White);
+            spriteBatch.Draw(heros.sprite, heros.position, Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

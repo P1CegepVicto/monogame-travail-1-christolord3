@@ -23,4 +23,6 @@ C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_Mono
 C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\obj\x86\Debug\Projet1.csprojResolveAssemblyReference.cache
 C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\obj\x86\Debug\Projet1.exe
 C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\obj\x86\Debug\Projet1.pdb
-C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\mario-jump.png
+C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\Vaisseau.png
+C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\Missile.png
+C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\Background.jpg
