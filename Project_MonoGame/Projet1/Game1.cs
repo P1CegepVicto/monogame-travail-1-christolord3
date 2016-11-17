@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Projet1
 {
@@ -16,6 +17,7 @@ namespace Projet1
         GameObject Background;
         GameObject missile;
         GameObject ennemi;
+        Random random = new Random();
 
         public Game1()
         {
@@ -53,11 +55,13 @@ namespace Projet1
             heros.estVivant = true;
             Background.estVivant = true;
             Background.sprite = Content.Load<Texture2D>("Background.jpg");
-            heros.vitesse = 5;
+            heros.vitesse = 10;
             heros.hauteur = 48;
             heros.longueur = 160;
             heros.sprite = Content.Load<Texture2D>("Vaisseau.png");
             heros.position = heros.sprite.Bounds;
+            heros.position.X = fenetre.Width / 2;
+            heros.position.Y = fenetre.Height - heros.hauteur;
             Background.position = Background.sprite.Bounds;
             Background.hauteur = 1920;
             Background.longueur = 1080;
@@ -65,6 +69,16 @@ namespace Projet1
             missile.estVivant = false;
             missile.sprite = Content.Load<Texture2D>("Missile.png");
             missile.position = missile.sprite.Bounds;
+            missile.vitesse = 15;
+            ennemi = new GameObject();
+            ennemi.estVivant = true;
+            ennemi.sprite = Content.Load<Texture2D>("ennemi.png");
+            ennemi.position = ennemi.sprite.Bounds;
+            ennemi.hauteur = 112;
+            ennemi.longueur = 220;
+            ennemi.position.X = random.Next(0,fenetre.Width - ennemi.longueur);
+            ennemi.position.Y = 20;
+            ennemi.vitesse = 10;
 
             // TODO: use this.Content to load your game content here
         }
@@ -102,6 +116,11 @@ namespace Projet1
             {
                 missile.position.Y -= missile.vitesse;
             }
+            if(ennemi.estVivant == true)
+            {
+                ennemi.vitesse = random.Next(-90, 90);
+                ennemi.position.X += ennemi.vitesse;
+            }
         }
         public void limiteEcranObjet()
         {
@@ -109,9 +128,9 @@ namespace Projet1
             {
                 heros.position.X = 0;
             }
-            if(heros.position.Y < 0)
+            if(heros.position.Y < 700)
             {
-                heros.position.Y = 0;
+                heros.position.Y = 700;
             }
             if (heros.position.Y > fenetre.Height - heros.hauteur)
             {
@@ -124,6 +143,14 @@ namespace Projet1
             if(missile.position.Y < 0)
             {
                 missile.estVivant = false;
+            }
+            if(ennemi.position.X < 0)
+            {
+                ennemi.position.X = 0;
+            }
+            if (ennemi.position.X > fenetre.Width - ennemi.longueur)
+            {
+                ennemi.position.X = fenetre.Width - ennemi.longueur;
             }
         }
         public void clavier()
@@ -155,7 +182,6 @@ namespace Projet1
                     missile.estVivant = true;
                     missile.position.X = (heros.position.Width / 2) + heros.position.X;
                     missile.position.Y = (heros.position.Height / 2) + heros.position.Y;
-                    missile.vitesse = 15;
                 }
             }
         }
@@ -169,6 +195,7 @@ namespace Projet1
             GraphicsDevice.Clear(Color.Aqua);
             spriteBatch.Begin();
             spriteBatch.Draw(Background.sprite, Background.position, Color.White);
+            spriteBatch.Draw(ennemi.sprite, ennemi.position, Color.White);
             if (missile.estVivant == true)
             {
                 spriteBatch.Draw(missile.sprite, missile.position, Color.White);

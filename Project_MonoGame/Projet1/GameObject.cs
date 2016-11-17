@@ -16,5 +16,6 @@ namespace Projet1
         public int longueur;
         public Texture2D sprite;
         public Rectangle position;
+        public int vie;
     }
 }
