@@ -84,6 +84,7 @@ namespace Projet1
             ennemi.vitesse = 10;
             son = Content.Load<SoundEffect>("Sounds\\Missile");
             missileSon = son.CreateInstance();
+            missileSon.Volume = 0.05f;
 
             // TODO: use this.Content to load your game content here
         }
@@ -148,6 +149,7 @@ namespace Projet1
             if(missile.position.Y < 0)
             {
                 missile.estVivant = false;
+                missileSon.Stop();
             }
             if(ennemi.position.X < 0)
             {
