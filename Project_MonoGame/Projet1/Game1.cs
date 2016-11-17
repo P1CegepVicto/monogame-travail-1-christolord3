@@ -212,6 +212,22 @@ namespace Projet1
                 missileEnnemi.estVivant = false;
                 explosionHeros.estVivant = true;
             }
+            if(missileEnnemi.GetRect().Intersects(heros.GetRect()) && missileEnnemi.estVivant == true)
+            {
+                heros.vie -= 1;
+                missileEnnemi.estVivant = false;
+                explosionHeros.estVivant = true;
+                explosionHeros.position.X = heros.position.X + (heros.longueur / 2);
+                explosionHeros.position.Y = heros.position.Y + (heros.hauteur / 2);
+            }
+            if (missile.GetRect().Intersects(ennemi.GetRect()) && missile.estVivant == true)
+            {
+                ennemi.vie -= 1;
+                missile.estVivant = false;
+                explosion.estVivant = true;
+                explosion.position.X = ennemi.position.X + (ennemi.longueur / 2);
+                explosion.position.Y = ennemi.position.Y + (ennemi.hauteur / 2);
+            }
         }
         public void clavier()
         {
@@ -256,7 +272,7 @@ namespace Projet1
             GraphicsDevice.Clear(Color.Aqua);
             spriteBatch.Begin();
             spriteBatch.Draw(Background.sprite, Background.position, Color.White);
-            if (heros.vie != 0)
+            if (heros.vie > 0 && ennemi.vie > 0)
             {
                 spriteBatch.Draw(ennemi.sprite, ennemi.position, Color.White);
                 spriteBatch.Draw(heros.sprite, heros.position, Color.White);
@@ -275,6 +291,21 @@ namespace Projet1
                 if (explosionHeros.estVivant == true)
                 {
                     spriteBatch.Draw(explosionHeros.sprite, explosionHeros.position, Color.White);
+                }
+            }
+            else
+            {
+                if(heros.vie == 0)
+                {
+
+                }
+                else if(heros.vie == 0)
+                {
+
+                }
+                else
+                {
+
                 }
             }
             spriteBatch.End();
