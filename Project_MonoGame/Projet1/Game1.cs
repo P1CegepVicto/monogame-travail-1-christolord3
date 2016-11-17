@@ -18,6 +18,7 @@ namespace Projet1
         GameObject Background;
         GameObject missile;
         GameObject ennemi;
+        GameObject explosion;
         Random random = new Random();
         SoundEffect son;
         SoundEffectInstance missileSon;
@@ -85,6 +86,12 @@ namespace Projet1
             son = Content.Load<SoundEffect>("Sounds\\Missile");
             missileSon = son.CreateInstance();
             missileSon.Volume = 0.05f;
+            explosion = new GameObject();
+            explosion.estVivant = false;
+            explosion.sprite = Content.Load<Texture2D>("explosion.png");
+            explosion.position = explosion.sprite.Bounds;
+            explosion.hauteur = 51;
+            explosion.longueur = 50;
 
             // TODO: use this.Content to load your game content here
         }
@@ -150,6 +157,9 @@ namespace Projet1
             {
                 missile.estVivant = false;
                 missileSon.Stop();
+                explosion.estVivant = true;
+                explosion.position.X = missile.position.X;
+                explosion.position.Y = missile.position.Y;
             }
             if(ennemi.position.X < 0)
             {
@@ -197,7 +207,7 @@ namespace Projet1
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        //<param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Aqua);
@@ -207,6 +217,10 @@ namespace Projet1
             if (missile.estVivant == true)
             {
                 spriteBatch.Draw(missile.sprite, missile.position, Color.White);
+            }
+            if (explosion.estVivant == true)
+            {
+                spriteBatch.Draw(explosion.sprite, explosion.position, Color.White);
             }
             spriteBatch.Draw(heros.sprite, heros.position, Color.White);
             spriteBatch.End();
