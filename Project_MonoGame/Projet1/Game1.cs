@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System;
 
 namespace Projet1
@@ -18,6 +19,8 @@ namespace Projet1
         GameObject missile;
         GameObject ennemi;
         Random random = new Random();
+        SoundEffect son;
+        SoundEffectInstance missileSon;
 
         public Game1()
         {
@@ -79,6 +82,8 @@ namespace Projet1
             ennemi.position.X = random.Next(0,fenetre.Width - ennemi.longueur);
             ennemi.position.Y = 20;
             ennemi.vitesse = 10;
+            son = Content.Load<SoundEffect>("Sounds\\Missile");
+            missileSon = son.CreateInstance();
 
             // TODO: use this.Content to load your game content here
         }
@@ -105,7 +110,7 @@ namespace Projet1
             }
             clavier();
             mouvementNonJoueur();
-            limiteEcranObjet();
+            collision();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -122,15 +127,15 @@ namespace Projet1
                 ennemi.position.X += ennemi.vitesse;
             }
         }
-        public void limiteEcranObjet()
+        public void collision()
         {
             if(heros.position.X < 0)
             {
                 heros.position.X = 0;
             }
-            if(heros.position.Y < 700)
+            if(heros.position.Y < (fenetre.Height / 4) * 3)
             {
-                heros.position.Y = 700;
+                heros.position.Y = (fenetre.Height / 4) * 3;
             }
             if (heros.position.Y > fenetre.Height - heros.hauteur)
             {
@@ -179,6 +184,7 @@ namespace Projet1
             {
                 if (missile.estVivant != true)
                 {
+                    missileSon.Play();
                     missile.estVivant = true;
                     missile.position.X = (heros.position.Width / 2) + heros.position.X;
                     missile.position.Y = (heros.position.Height / 2) + heros.position.Y;
