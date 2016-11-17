@@ -17,5 +17,16 @@ namespace Projet1
         public Texture2D sprite;
         public Rectangle position;
         public int vie;
+
+        public Rectangle GetRect() //1 Pour sauver plusieurs lignes de code
+        {
+            Rectangle rectColision;
+            rectColision.X = (int)this.position.X;
+            rectColision.Y = (int)this.position.Y;
+            rectColision.Height = this.sprite.Height;
+            rectColision.Width = this.sprite.Width;
+
+            return rectColision;
+        }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Christopher/Documents/GitHub/Projects/monogame-travail-1-christolord3/Project_MonoGame/Projet1/Content/Sounds/Missile.mp3</SourceFile>
-  <SourceTime>2016-11-17T00:40:02.1408179-05:00</SourceTime>
-  <DestFile>C:/Users/Christopher/Documents/GitHub/Projects/monogame-travail-1-christolord3/Project_MonoGame/Projet1/Content/bin/Windows/Sounds/Missile.xnb</DestFile>
-  <DestTime>2016-11-17T00:40:05.9148992-05:00</DestTime>
+  <SourceFile>C:/Users/ChristoPC/Documents/GitHub/monogame-travail-1-christolord3/Project_MonoGame/Projet1/Content/Sounds/Missile.mp3</SourceFile>
+  <SourceTime>2016-11-17T13:13:04.8179189-05:00</SourceTime>
+  <DestFile>C:/Users/ChristoPC/Documents/GitHub/monogame-travail-1-christolord3/Project_MonoGame/Projet1/Content/bin/Windows/Sounds/Missile.xnb</DestFile>
+  <DestTime>2016-11-17T13:15:59.8419336-05:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2016-03-30T02:36:08-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
