@@ -141,9 +141,9 @@ namespace Projet1
             {
                 heros.position.X = 0;
             }
-            if(heros.position.Y < (fenetre.Height / 4) * 3)
+            if(heros.position.Y < (fenetre.Height / 8) * 7)
             {
-                heros.position.Y = (fenetre.Height / 4) * 3;
+                heros.position.Y = (fenetre.Height / 8) * 7;
             }
             if (heros.position.Y > fenetre.Height - heros.hauteur)
             {
@@ -153,13 +153,14 @@ namespace Projet1
             {
                 heros.position.X = fenetre.Width - heros.longueur;
             }
-            if(missile.position.Y < 0)
+            if(missile.position.Y <= 0)
             {
                 missile.estVivant = false;
                 missileSon.Stop();
                 explosion.estVivant = true;
                 explosion.position.X = missile.position.X;
                 explosion.position.Y = missile.position.Y;
+                explosion.estVivant = false;
             }
             if(ennemi.position.X < 0)
             {
@@ -220,7 +221,7 @@ namespace Projet1
             }
             if (explosion.estVivant == true)
             {
-                spriteBatch.Draw(explosion.sprite, explosion.position, Color.White);
+                spriteBatch.Draw(missile.sprite, missile.position, Color.White);
             }
             spriteBatch.Draw(heros.sprite, heros.position, Color.White);
             spriteBatch.End();
