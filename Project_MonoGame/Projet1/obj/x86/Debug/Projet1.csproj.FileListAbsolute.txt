@@ -60,3 +60,4 @@ C:\Users\Christopher\Documents\GitHub\Projects\monogame-travail-1-christolord3\P
 C:\Users\Christopher\Documents\GitHub\Projects\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\explosion.png
 C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\explosion.png
 C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\Sounds\Missile.xnb
+C:\Users\ChristoPC\Documents\GitHub\monogame-travail-1-christolord3\Project_MonoGame\Projet1\bin\Windows\x86\Debug\Content\MissileInv.png

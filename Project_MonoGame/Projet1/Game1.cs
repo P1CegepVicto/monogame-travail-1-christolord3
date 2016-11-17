@@ -79,7 +79,7 @@ namespace Projet1
             missile.vitesse = 15;
             missileEnnemi = new GameObject();
             missileEnnemi.estVivant = false;
-            missileEnnemi.sprite = Content.Load<Texture2D>("Missile.png");
+            missileEnnemi.sprite = Content.Load<Texture2D>("MissileInv.png");
             missileEnnemi.position = missile.sprite.Bounds;
             missileEnnemi.vitesse = 15;
             ennemi = new GameObject();
@@ -139,15 +139,19 @@ namespace Projet1
         }
         public void ActionNonJoueur(GameTime temps)
         {
-            if (explosion.estVivant == true && temps.TotalGameTime.Milliseconds % 2000 == 0)
+            if (explosion.estVivant == true && temps.TotalGameTime.Milliseconds % 500 == 0)
             {
                 explosion.estVivant = false;
             }
-            if(missileEnnemi.estVivant == false && temps.TotalGameTime.Milliseconds % 500 == 0)
+            if (explosionHeros.estVivant == true && temps.TotalGameTime.Milliseconds % 500 == 0)
+            {
+                explosionHeros.estVivant = false;
+            }
+            if (missileEnnemi.estVivant == false && explosionHeros.estVivant == false)
             {
                 missileEnnemi.estVivant = true;
-                missileEnnemi.position.X = ennemi.position.X + ennemi.longueur / 2;
-                missileEnnemi.position.Y = ennemi.position.Y + ennemi.hauteur / 2;
+                missileEnnemi.position.X = ennemi.position.X + (ennemi.longueur / 2);
+                missileEnnemi.position.Y = ennemi.position.Y + (ennemi.hauteur / 2);
             }
         }
 
@@ -155,7 +159,7 @@ namespace Projet1
         {
             if(missileEnnemi.estVivant == true)
             {
-                missileEnnemi.position.Y += missile.vitesse;
+                missileEnnemi.position.Y += missileEnnemi.vitesse;
             }
             if (missile.estVivant == true)
             {
@@ -201,9 +205,12 @@ namespace Projet1
             {
                 ennemi.position.X = fenetre.Width - ennemi.longueur;
             }
-            if(missileEnnemi.position.Y > fenetre.Height)
+            if(missileEnnemi.position.Y >= fenetre.Height - missileEnnemi.hauteur)
             {
+                explosionHeros.position.X = missileEnnemi.position.X;
+                explosionHeros.position.Y = fenetre.Height - explosionHeros.hauteur;
                 missileEnnemi.estVivant = false;
+                explosionHeros.estVivant = true;
             }
         }
         public void clavier()
@@ -257,13 +264,17 @@ namespace Projet1
                 {
                     spriteBatch.Draw(missile.sprite, missile.position, Color.White);
                 }
+                if (missileEnnemi.estVivant == true)
+                {
+                    spriteBatch.Draw(missileEnnemi.sprite, missileEnnemi.position, Color.White);
+                }
                 if (explosion.estVivant == true)
                 {
                     spriteBatch.Draw(explosion.sprite, explosion.position, Color.White);
                 }
-                if (missileEnnemi.estVivant == true)
+                if (explosionHeros.estVivant == true)
                 {
-                    spriteBatch.Draw(missileEnnemi.sprite, missileEnnemi.position, Color.White);
+                    spriteBatch.Draw(explosionHeros.sprite, explosionHeros.position, Color.White);
                 }
             }
             spriteBatch.End();
